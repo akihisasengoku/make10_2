@@ -19,11 +19,30 @@
                     </view>
                     <connections>
                         <segue destination="XKN-fR-shp" kind="show" identifier="next3" id="ENF-hf-VMY"/>
+                        <segue destination="3OX-Tu-HHA" kind="show" identifier="next6" id="BkW-im-r3O"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WzF-87-4TQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1627" y="212"/>
+            <point key="canvasLocation" x="-236" y="1030"/>
+        </scene>
+        <!--All Score View Controller-->
+        <scene sceneID="UPb-bP-bet">
+            <objects>
+                <viewController id="3OX-Tu-HHA" customClass="AllScoreViewController" customModule="make10_2" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="e9i-Ja-A1t"/>
+                        <viewControllerLayoutGuide type="bottom" id="aAz-IK-hJZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lCK-Tq-cTg">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Cx-1u-D9f" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="566" y="1034"/>
         </scene>
         <!--Rule View Controller-->
         <scene sceneID="Ybi-LM-xBX">
@@ -44,7 +63,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e6n-7E-I4q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-470" y="212"/>
+            <point key="canvasLocation" x="-236" y="-114"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
@@ -61,11 +80,12 @@
                     </view>
                     <connections>
                         <segue destination="MUh-hY-fY0" kind="show" identifier="next2" id="Qlk-aw-dXl"/>
+                        <segue destination="r44-lS-VRk" kind="show" identifier="next5" id="gdd-Hv-6ol"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="246" y="212"/>
+            <point key="canvasLocation" x="733" y="-114"/>
         </scene>
         <!--Score View Controller-->
         <scene sceneID="J4U-vk-9nG">
@@ -86,7 +106,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sAF-zq-M7e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="729" y="1116"/>
+            <point key="canvasLocation" x="1669" y="-114"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="og0-ko-rWb"/>
+    </inferredMetricsTieBreakers>
 </document>

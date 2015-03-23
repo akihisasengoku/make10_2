@@ -46,7 +46,7 @@ class TitleViewController: UIViewController {
     }
     
     func score (sender : UIButton) {
-        performSegueWithIdentifier("next3",sender: nil)
+        performSegueWithIdentifier("next6",sender: nil)
     }
 
     /*

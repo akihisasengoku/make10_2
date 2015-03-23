@@ -38,6 +38,7 @@ class ViewController: UIViewController {
     var yesButton : UIButton = UIButton()
     var noButton : UIButton = UIButton()
     var restartButton :UIButton = UIButton()
+    var homeButton :UIButton = UIButton()
     
     //タイム管理用
     var initTimer : NSTimer!
@@ -140,10 +141,11 @@ class ViewController: UIViewController {
         yesButton = makeButton(1, title: "YES", myX: ButtonX*1, myY: ButtonY*15, s: "yesButtonPush:")
         noButton = makeButton(1, title: "NO", myX: ButtonX*3, myY: ButtonY*15, s: "noButtonPush:")
         restartButton = makeButton(1, title: "Restart", myX: ButtonX*2, myY: ButtonY*18, s: "restartButtonPush:")
+        homeButton = makeButton(1, title: "Home", myX: ButtonX*2, myY: ButtonY*21, s: "homeButtonPush:")
         self.view.addSubview(yesButton)
         self.view.addSubview(noButton)
         self.view.addSubview(restartButton)
-        
+        self.view.addSubview(homeButton)
         
         //最初のカウント用ラベル
         initBackLable.frame = CGRectMake(0,0,self.view.frame.width,self.view.frame.height)
@@ -170,6 +172,7 @@ class ViewController: UIViewController {
         initCountLabel.alpha = 1.0
         initCountLabel.text = timerCount.description
         restartButton.alpha = 0
+        homeButton.alpha = 0
         initTimer = NSTimer.scheduledTimerWithTimeInterval(0.9, target: self, selector: Selector("firstUpdate"), userInfo: nil, repeats: true)
     }
     
@@ -259,6 +262,7 @@ class ViewController: UIViewController {
         titleLabel.text = "不正解 "+ansText
         buttonFlag = 0
         restartButton.alpha = 1
+        homeButton.alpha = 1
         playTimer.invalidate()
     }
     
@@ -266,6 +270,11 @@ class ViewController: UIViewController {
     //リスタートするときのメソッド
     func restartButtonPush(sender: UIButton) {
         firstStart()
+    }
+    
+    //リスタートするときのメソッド
+    func homeButtonPush(sender: UIButton) {
+        performSegueWithIdentifier("next5",sender: nil)
     }
 
     //ラベルを作成するメソッド
@@ -551,16 +560,20 @@ class ViewController: UIViewController {
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var view = segue.destinationViewController as ScoreViewController
-        switch app.gameMode {
-        case 0 :
-            view.scoreTime = playTimeCount
-        case 1:
-            view.ansCountText = (ansCount , ansText)
-        default :
-            println("era-")
-            break
+        
+        if segue.identifier == "next2" {
+            var view = segue.destinationViewController as ScoreViewController
+            switch app.gameMode {
+            case 0 :
+                view.scoreTime = playTimeCount
+            case 1:
+                view.ansCountText = (ansCount , ansText)
+            default :
+                println("era-")
+                break
+            }
         }
+        
     }
     
     func xRate () -> CGFloat {
