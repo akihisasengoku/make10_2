@@ -93,6 +93,45 @@ class ScoreViewController: UIViewController {
     }
     
     
+    func dataUpdate1 () {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        scoreArray = defaults.objectForKey("g1Scores") as [Double]
+        
+        var flag = 0
+        for i in 0...8 {
+            if (scoreArray[i] == 0.00 || scoreArray[i] > scoreTime) && flag == 0 {
+                scoreArray.insert(scoreTime, atIndex: i)
+                updateNum = i
+                flag = 1
+            }
+        }
+        
+        //データの書き込み
+        defaults.setObject(scoreArray, forKey: "g1Scores")
+        defaults.synchronize()
+        
+    }
+    
+    func dataUpdate2 () {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        scoreArray = defaults.objectForKey("g2Scores") as [Double]
+        
+        var flag = 0
+        for i in 0...8 {
+            if (scoreArray[i] == 0.00 || scoreArray[i] < scoreTime) && flag == 0 {
+                scoreArray.insert(Double(ansCountText.0), atIndex: i)
+                updateNum = i
+                flag = 1
+            }
+        }
+        
+        //データの書き込み
+        defaults.setObject(scoreArray, forKey: "g2Scores")
+        defaults.synchronize()
+        
+    }
+    
+    
     func makeMyLabel(num : Int, title: NSString, myX: CGFloat, myY: CGFloat) -> UILabel{
         
         let myLabel: UILabel = UILabel()
@@ -134,42 +173,18 @@ class ScoreViewController: UIViewController {
         
     }
     
-    func dataUpdate1 () {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        scoreArray = defaults.objectForKey("g1Scores") as [Double]
-        
-        var flag = 0
-        for i in 0...8 {
-            if (scoreArray[i] == 0.00 || scoreArray[i] > scoreTime) && flag == 0 {
-                scoreArray.insert(scoreTime, atIndex: i)
-                updateNum = i
-                flag = 1
-            }
-        }
-        
-        //データの書き込み
-        defaults.setObject(scoreArray, forKey: "g1Scores")
-        defaults.synchronize()
-        
+    func xRate () -> CGFloat {
+        var rate = Double(self.view.frame.width) / 375.0
+        return CGFloat(rate)
     }
     
-    func dataUpdate2 () {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        scoreArray = defaults.objectForKey("g2Scores") as [Double]
-        
-        var flag = 0
-        for i in 0...8 {
-            if (scoreArray[i] == 0.00 || scoreArray[i] < scoreTime) && flag == 0 {
-                scoreArray.insert(Double(ansCountText.0), atIndex: i)
-                updateNum = i
-                flag = 1
-            }
-        }
-        
-        //データの書き込み
-        defaults.setObject(scoreArray, forKey: "g2Scores")
-        defaults.synchronize()
-        
+    func yRate () -> CGFloat {
+        var rate = Double(self.view.frame.height) / 667.0
+        return CGFloat(rate)
+    }
+    
+    func sizeRate () -> CGFloat {
+        return (xRate()+yRate())/2
     }
 
 }
