@@ -198,7 +198,6 @@ class ViewController: UIViewController {
     func playUpdate () {
         playTimeCount = playTimeCount + 0.01
         
-        println(playTimeCount)
     }
     
     
@@ -235,7 +234,7 @@ class ViewController: UIViewController {
         //終了判定
         switch app.gameMode {
         case 0 :
-            if ansCount == 2 {
+            if ansCount == 10 {
                 playTimer.invalidate()
                 performSegueWithIdentifier("next2",sender: nil)
             }
@@ -259,7 +258,7 @@ class ViewController: UIViewController {
         }
         
         countLabel.text = "GAMEOVER"
-        titleLabel.text = "不正解 "+ansText
+        titleLabel.text = ansText
         buttonFlag = 0
         restartButton.alpha = 1
         homeButton.alpha = 1
@@ -353,6 +352,7 @@ class ViewController: UIViewController {
             }
         }
         
+        
         //識別番号　３けた
         locateNum = 100*Int(arc4random() % 10) + 10*Int(arc4random() % 10) + Int(arc4random() % 10)
         locateNumLabel.text = locateNum.description
@@ -410,8 +410,117 @@ class ViewController: UIViewController {
             labelArray[i].textColor = colorText
         }
     }
+
+    
+    //ここから計算！
+    func autoCal()->Bool {
+        let arrayCount = numArray.count
+        
+        if arrayCount == 0 || arrayCount == 1 {
+            return false
+        }
+        
+        //初期化
+        var sum1 : Double = 0.0
+        var sum2 : Double = 0.0
+        var sum3 : Double = 0.0
+        ansSignArray = [String](count: arrayCount, repeatedValue: "")
+        
+        for a in 0...3{
+            sum1 = self.cal(Double(numArray[0]), num2: Double(numArray[1]), cal: a)
+            var text = "＝"+String("\(sum1)")
+            ansSignArray[0] = String(numArray[0])+self.signGet(a)+String(numArray[1])+text
+            println(ansSignArray[0])
+            if arrayCount == 2 {
+                if sum1 == 10 {
+                    ansText = ansSignArray[0]
+                    println(ansText)
+                    return true
+                }
+            }
+            
+            for b in 0...3{
+                if arrayCount == 2 {
+                    continue
+                }
+                
+                sum2 = self.cal(sum1, num2: Double(numArray[2]), cal: b)
+                ansSignArray[1] = ","+d(sum1)+self.signGet(b)+String(numArray[2])+"＝"+d(sum2)
+                
+                if arrayCount == 3 {
+                    if sum2 == 10 {
+                        ansText = ansSignArray[0]+ansSignArray[1]
+                        println(ansText)
+                        return true
+                    }
+                }
+                
+                for c in 0...3{
+                    if arrayCount < 4 {
+                        continue
+                    }
+                    
+                    sum3 = self.cal(sum2, num2: Double(numArray[3]), cal: c)
+                    ansSignArray[2] = ","+d(sum2)+self.signGet(c)+String(numArray[3])+"＝"+d(sum3)
+                    
+                    
+                    if sum3 == 10 {
+                        ansText = ansSignArray[0]+ansSignArray[1]+ansSignArray[2]
+                        println(ansText)
+                        return true
+                    }
+                }
+            }
+        }
+        ansText =  "10は作れない"
+        println(ansText)
+        return false
+    }
     
     
+    func signGet(i:Int) -> String{
+        switch i{
+        case 0:
+            return "➕"
+        case 1:
+            return "➖"
+        case 2:
+            return "✖︎"
+        case 3:
+            return "➗"
+        default :
+            return ""
+        }
+    }
+    
+    func cal(num1 : Double , num2 : Double , cal:Int) -> Double{
+        switch cal {
+        case 0 :
+            return num1 + num2
+        case 1 :
+            return num1 - num2
+        case 2 :
+            return num1 * num2
+        case 3 :
+            return num1 / num2
+        default :
+            println("ミス！")
+            return 0
+        }
+    }
+    
+    func d(d:Double) ->String {
+        let dChange :Double = floor(d)
+        if dChange == d {
+            let i : Int = Int (dChange)
+            return String(i)
+        }else{
+            return String("\(d)")
+        }
+        
+    }
+    
+    /*
     
     //ここから計算！
     func autoCal()->Bool {
@@ -558,6 +667,7 @@ class ViewController: UIViewController {
         return sum
     }
     
+*/
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         

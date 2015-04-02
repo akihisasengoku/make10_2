@@ -40,9 +40,9 @@ class RuleViewController: UIViewController {
         
         var ruleText : String = ""
         if app.gameMode == 0 {
-            ruleText = "10問連続で正解するタイム\n間違えたらそこで終了"
+            ruleText = "10を作るナンバープレートを探す"
         } else if (app.gameMode == 1) {
-            ruleText = "間違えずに正解できる数\n間違えたらそこで終了"
+            ruleText = "10を作るナンバープレートを探す"
         }
         
         ruleLabel = makeNumLabel(1, title: ruleText, myX: ruleX, myY: ruleY*9)
@@ -50,25 +50,25 @@ class RuleViewController: UIViewController {
         ruleLabel.numberOfLines = 2
         self.view.addSubview(ruleLabel)
         
-        ruleText = "1.真ん中の数字（1234）のみを使って10を作る"
+        ruleText = "1.真ん中の数字のみを使う"
         ruleLabel = makeNumLabel(1, title: ruleText, myX: ruleX, myY: ruleY*28)
         ruleLabel.font = UIFont.systemFontOfSize(CGFloat(20)*sizeRate())
         ruleLabel.numberOfLines = 2
         self.view.addSubview(ruleLabel)
         
-        ruleText = "2.数字の並び替えはできません"
+        ruleText = "2.➕、➖、✖︎、➗どれでも使える"
         ruleLabel = makeNumLabel(1, title: ruleText, myX: ruleX, myY: ruleY*31)
         ruleLabel.font = UIFont.systemFontOfSize(CGFloat(20)*sizeRate())
         ruleLabel.numberOfLines = 2
         self.view.addSubview(ruleLabel)
         
-        ruleText = "3.➕、➖、✖︎、➗のみを使う"
+        ruleText = "3.左から順に計算する"
         ruleLabel = makeNumLabel(1, title: ruleText, myX: ruleX, myY: ruleY*34)
         ruleLabel.font = UIFont.systemFontOfSize(CGFloat(20)*sizeRate())
         ruleLabel.numberOfLines = 2
         self.view.addSubview(ruleLabel)
         
-        ruleText = "例：1✖︎2➖3✖︎4＝10"
+        ruleText = "例：8➗4＝2、2✖︎1＝2、2➕8＝10"
         ruleLabel = makeNumLabel(1, title: ruleText, myX: ruleX, myY: ruleY*24)
         ruleLabel.font = UIFont.systemFontOfSize(CGFloat(20)*sizeRate())
         ruleLabel.numberOfLines = 2
@@ -138,10 +138,10 @@ class RuleViewController: UIViewController {
         letterLabel.font = UIFont.systemFontOfSize(CGFloat(40 * sizeRate()))
         self.view.addSubview(letterLabel)
         
-        labelArray.insert(makeNumLabel(0, title:"1", myX: 20 + labelX*10, myY: numY), atIndex: 0)
-        labelArray.insert(makeNumLabel(0, title:"2", myX: 20 + labelX*16, myY: numY), atIndex: 1)
-        labelArray.insert(makeNumLabel(0, title:"3", myX: 20 + labelX*26, myY: numY), atIndex: 2)
-        labelArray.insert(makeNumLabel(0, title:"4", myX: 20 + labelX*32, myY: numY), atIndex: 3)
+        labelArray.insert(makeNumLabel(0, title:"8", myX: 20 + labelX*10, myY: numY), atIndex: 0)
+        labelArray.insert(makeNumLabel(0, title:"4", myX: 20 + labelX*16, myY: numY), atIndex: 1)
+        labelArray.insert(makeNumLabel(0, title:"1", myX: 20 + labelX*26, myY: numY), atIndex: 2)
+        labelArray.insert(makeNumLabel(0, title:"8", myX: 20 + labelX*32, myY: numY), atIndex: 3)
         
         self.view.addSubview(labelArray[0])
         self.view.addSubview(labelArray[1])
@@ -176,7 +176,7 @@ class RuleViewController: UIViewController {
     func makeNumLabel(num : Int, title: NSString, myX: CGFloat, myY: CGFloat) -> UILabel{
         
         let myLabel: UILabel = UILabel()
-        myLabel.frame = CGRectMake(0,0,300 * xRate(),130 * yRate())
+        myLabel.frame = CGRectMake(0,0,320 * xRate(),130 * yRate())
         myLabel.layer.position = CGPoint(x: myX, y: myY)
         myLabel.font = UIFont(name: "TrebuchetMS-Bold", size: 95 * sizeRate())
         
