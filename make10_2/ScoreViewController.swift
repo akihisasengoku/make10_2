@@ -54,7 +54,7 @@ class ScoreViewController: UIViewController {
             timeText = String("\(scoreTime)")
             self.dataUpdate1()
         case 1:
-            modTitle = ansCountText.1
+            modTitle = "Perfect"
             timeText = ansCountText.0.description
             self.dataUpdate2()
         default :
@@ -62,7 +62,7 @@ class ScoreViewController: UIViewController {
         }
         
         //タイトル
-        self.view.addSubview(makeMyLabel(0, title:modTitle, myX: X, myY: Y*3 ,size:30))
+        self.view.addSubview(makeMyLabel(0, title:modTitle, myX: X, myY: Y*3 ,size:35))
         //現在スコア
         self.view.addSubview(makeMyLabel(0, title:timeText , myX: X, myY: Y * 7 , size : 40))
         

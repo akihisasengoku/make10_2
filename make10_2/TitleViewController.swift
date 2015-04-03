@@ -28,6 +28,17 @@ class TitleViewController: UIViewController {
         self.view.addSubview(g1Button)
         self.view.addSubview(g2Button)
         self.view.addSubview(scoreButton)
+        
+        // UIImageViewを作成する.
+        let myImageView: UIImageView = UIImageView(frame: CGRectMake(0,0,self.view.frame.size.width/5*4,self.view.frame.size.height/6))
+        // 表示する画像を設定する.
+        let myImage = UIImage(named: "logo10.png")
+        // 画像をUIImageViewに設定する.
+        myImageView.image = myImage
+        // 画像の表示する座標を指定する.
+        myImageView.layer.position = CGPoint(x: X, y: Y * 4)
+        // UIImageViewをViewに追加する.
+        self.view.addSubview(myImageView)
     }
 
     override func didReceiveMemoryWarning() {

@@ -93,9 +93,10 @@ class ViewController: UIViewController {
         titleLabel.textAlignment = NSTextAlignment.Center
         self.view.addSubview(titleLabel)
         
-        countLabel.frame = CGRectMake(0, 0, self.view.frame.size.width, 80)
-        countLabel.layer.position = CGPoint(x: self.view.frame.size.width/2, y: positionY - frameY/2 - frameY/2)
-        countLabel.font = UIFont.systemFontOfSize(CGFloat(50) * sizeRate())
+        countLabel.frame = CGRectMake(0, 0, self.view.frame.size.width, 160)
+        countLabel.layer.position = CGPoint(x: self.view.frame.size.width/2, y: positionY - frameY/2 - frameY/10*7)
+        countLabel.font = UIFont.systemFontOfSize(CGFloat(45) * sizeRate())
+        countLabel.numberOfLines = 2
         countLabel.textAlignment = NSTextAlignment.Center
         self.view.addSubview(countLabel)
         
@@ -249,15 +250,16 @@ class ViewController: UIViewController {
     func notCollect () {
         //終了判定
         switch app.gameMode {
+        case 0 :
+            countLabel.text = "GAMEOVER"
+            break
         case 1 :
-            playTimer.invalidate()
-            performSegueWithIdentifier("next2",sender: nil)
+            homeButton.titleLabel?.text="Score"
+            countLabel.text = "Score\n"+String(ansCount)
         default :
-            println("era-")
             break
         }
         
-        countLabel.text = "GAMEOVER"
         titleLabel.text = ansText
         buttonFlag = 0
         restartButton.alpha = 1
@@ -273,14 +275,22 @@ class ViewController: UIViewController {
     
     //リスタートするときのメソッド
     func homeButtonPush(sender: UIButton) {
-        performSegueWithIdentifier("next5",sender: nil)
+        switch app.gameMode {
+        case 0 :
+            performSegueWithIdentifier("next5",sender: nil)
+
+        case 1 :
+            performSegueWithIdentifier("next2",sender: nil)
+        default :
+            break
+        }
     }
 
     //ラベルを作成するメソッド
     func makeNumLabel(num : Int, title: NSString, myX: CGFloat, myY: CGFloat) -> UILabel{
         
         let myLabel: UILabel = UILabel()
-        myLabel.frame = CGRectMake(0,0,100 * xRate(),130 * yRate())
+        myLabel.frame = CGRectMake(0,0,160 * xRate(),380 * yRate())
         myLabel.layer.position = CGPoint(x: myX, y: myY)
         myLabel.font = UIFont(name: "TrebuchetMS-Bold", size: 95 * sizeRate())
         
@@ -428,7 +438,7 @@ class ViewController: UIViewController {
         
         for a in 0...3{
             sum1 = self.cal(Double(numArray[0]), num2: Double(numArray[1]), cal: a)
-            var text = "＝"+String("\(sum1)")
+            var text = "＝"+d(sum1)
             ansSignArray[0] = String(numArray[0])+self.signGet(a)+String(numArray[1])+text
             println(ansSignArray[0])
             if arrayCount == 2 {
@@ -445,7 +455,7 @@ class ViewController: UIViewController {
                 }
                 
                 sum2 = self.cal(sum1, num2: Double(numArray[2]), cal: b)
-                ansSignArray[1] = ","+d(sum1)+self.signGet(b)+String(numArray[2])+"＝"+d(sum2)
+                ansSignArray[1] = "、"+d(sum1)+self.signGet(b)+String(numArray[2])+"＝"+d(sum2)
                 
                 if arrayCount == 3 {
                     if sum2 == 10 {
@@ -461,7 +471,7 @@ class ViewController: UIViewController {
                     }
                     
                     sum3 = self.cal(sum2, num2: Double(numArray[3]), cal: c)
-                    ansSignArray[2] = ","+d(sum2)+self.signGet(c)+String(numArray[3])+"＝"+d(sum3)
+                    ansSignArray[2] = "、"+d(sum2)+self.signGet(c)+String(numArray[3])+"＝"+d(sum3)
                     
                     
                     if sum3 == 10 {
@@ -511,7 +521,7 @@ class ViewController: UIViewController {
     
     func d(d:Double) ->String {
         let dChange :Double = floor(d)
-        if dChange == d {
+        if dChange == d  && d < 100000 && d > -100000{
             let i : Int = Int (dChange)
             return String(i)
         }else{
