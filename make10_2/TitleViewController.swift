@@ -20,23 +20,23 @@ class TitleViewController: UIViewController {
         var X = self.view.frame.size.width / 2
         var Y = self.view.frame.size.height / 20
         
-        let titleLabel = makeNumLabel(0, title: "make10", myX: X, myY: Y * 4)
+        let titleLabel = makeNumLabel(0, title: "make10", myX: X, myY: Y * 6)
         self.view.addSubview(titleLabel)
-        let g1Button = makeButton(0, title: "TimeAttac", myX: X, myY: Y * 9, s: "g1:")
-        let g2Button = makeButton(0, title: "Perfect", myX: X, myY: Y * 12, s: "g2:")
-        let scoreButton = makeButton(0, title: "Score", myX: X, myY: Y * 15, s: "score:")
+        let g1Button = makeButton(0, title: "TimeAttack", myX: X, myY: Y * 10, s: "g1:")
+        let g2Button = makeButton(0, title: "Perfect", myX: X, myY: Y * 13, s: "g2:")
+        let scoreButton = makeButton(0, title: "Score", myX: X, myY: Y * 16, s: "score:")
         self.view.addSubview(g1Button)
         self.view.addSubview(g2Button)
         self.view.addSubview(scoreButton)
         
         // UIImageViewを作成する.
-        let myImageView: UIImageView = UIImageView(frame: CGRectMake(0,0,self.view.frame.size.width/5*4,self.view.frame.size.height/6))
+        let myImageView: UIImageView = UIImageView(frame: CGRectMake(0,0,self.view.frame.size.width/10*9,Y*5))
         // 表示する画像を設定する.
-        let myImage = UIImage(named: "logo10.png")
+        let myImage = UIImage(named: "make10.png")
         // 画像をUIImageViewに設定する.
         myImageView.image = myImage
         // 画像の表示する座標を指定する.
-        myImageView.layer.position = CGPoint(x: X, y: Y * 4)
+        myImageView.layer.position = CGPoint(x: X, y: Y * 5)
         // UIImageViewをViewに追加する.
         self.view.addSubview(myImageView)
     }

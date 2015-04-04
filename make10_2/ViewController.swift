@@ -30,6 +30,7 @@ class ViewController: UIViewController {
     var locateNumLabel : UILabel = UILabel()
     var countLabel : UILabel = UILabel()
     var titleLabel : UILabel = UILabel()
+    var ansLabel : UILabel = UILabel()
     
     var initBackLable : UILabel = UILabel()
     var initCountLabel : UILabel = UILabel()
@@ -38,6 +39,7 @@ class ViewController: UIViewController {
     var yesButton : UIButton = UIButton()
     var noButton : UIButton = UIButton()
     var restartButton :UIButton = UIButton()
+    var nextButton :UIButton = UIButton()
     var homeButton :UIButton = UIButton()
     
     //タイム管理用
@@ -53,7 +55,7 @@ class ViewController: UIViewController {
     var buttonFlag = 0
     
     
-    let letter = ["あ","い","う","え","お","か","き","く","け","こ","さ","し","す","せ","そ","た","ち","つ","て","と","な","に","ぬ","ね","の","は","ひ","ふ","へ","ほ","ま","み","む","め","も","や","ゆ","よ","ら","り","る","れ","ろ","を"]
+    let letter = ["あ","い","う","え","か","き","く","け","こ","さ","す","せ","そ","た","ち","つ","て","と","な","に","ぬ","ね","の","は","ひ","ふ","ほ","ま","み","む","め","も","や","ゆ","よ","ら","り","る","れ","ろ","を"]
     
     let locateText : [String] = ["尾張小牧","札幌","函館","旭川","室蘭","釧路","帯広","北見","青森","八戸","岩手","盛岡","平泉","宮城","仙台","秋田","山形","庄内","福島","会津","郡山","いわき","水戸","土浦","つくば","宇都宮","那須","とちぎ","群馬","前橋","高崎","大宮","川口","所沢","川越","熊谷","春日部","越谷","千葉","成田","習志野","袖ヶ浦","野田","柏","品川","世田谷","練馬","杉並","足立","八王子","多摩","横浜","川崎","湘南","相模","山梨","富士山","新潟","長岡","長野","松本","諏訪","富山","石川","金沢","福井","岐阜","飛騨","静岡","浜松","沼津","伊豆","名古屋","豊橋","三河","岡崎","豊田","尾張小牧","一宮","春日井","三重","鈴鹿","滋賀","京都","大阪","なにわ","和泉","堺","奈良","和歌山","神戸","姫路","鳥取","島根","岡山","倉敷","広島","福山","山口","下関","徳島","香川","愛媛","高知","福岡","北九州","久留米","筑豊","佐賀","長崎","佐世保","熊本","大分","宮崎","鹿児島","奄美","沖縄"]
     
@@ -142,10 +144,13 @@ class ViewController: UIViewController {
         yesButton = makeButton(1, title: "YES", myX: ButtonX*1, myY: ButtonY*15, s: "yesButtonPush:")
         noButton = makeButton(1, title: "NO", myX: ButtonX*3, myY: ButtonY*15, s: "noButtonPush:")
         restartButton = makeButton(1, title: "Restart", myX: ButtonX*2, myY: ButtonY*18, s: "restartButtonPush:")
+        nextButton = makeButton(1, title: "Next", myX: ButtonX*2, myY: ButtonY*18, s: "nextButtonPush:")
+        nextButton.alpha = 0
         homeButton = makeButton(1, title: "Home", myX: ButtonX*2, myY: ButtonY*21, s: "homeButtonPush:")
         self.view.addSubview(yesButton)
         self.view.addSubview(noButton)
         self.view.addSubview(restartButton)
+        self.view.addSubview(nextButton)
         self.view.addSubview(homeButton)
         
         //最初のカウント用ラベル
@@ -159,6 +164,11 @@ class ViewController: UIViewController {
         initCountLabel.font = UIFont(name: "TrebuchetMS-Bold", size: 150 * sizeRate())
         initCountLabel.textAlignment = NSTextAlignment.Center
         self.view.addSubview(initCountLabel)
+        
+        ansLabel = makeNumLabel(0, title: "aaa", myX: self.view.frame.size.width/2, myY: positionY - frameY/2 - frameY/2)
+        ansLabel.font = UIFont.systemFontOfSize(CGFloat(20) * sizeRate())
+        self.view.addSubview(ansLabel)
+        
     }
     
     
@@ -182,10 +192,12 @@ class ViewController: UIViewController {
             //最初のカウントは止める
             initTimer.invalidate()
             
-            //プレイ時間を計るタイマーを開始
-            playTimeCount = 0.0
-            playTimer =  NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: Selector("playUpdate"), userInfo: nil, repeats: true)
-            
+            if app.gameMode == 0 {
+                //プレイ時間を計るタイマーを開始
+                playTimeCount = 0.0
+                titleLabel.font = UIFont.systemFontOfSize(CGFloat(35) * sizeRate())
+                playTimer =  NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: Selector("playUpdate"), userInfo: nil, repeats: true)
+            }
             initBackLable.alpha = 0
             initCountLabel.alpha = 0
             buttonFlag = 1
@@ -198,6 +210,8 @@ class ViewController: UIViewController {
     
     func playUpdate () {
         playTimeCount = playTimeCount + 0.01
+        var text = String(format: "%0.1f", Float(playTimeCount))
+        titleLabel.text = text
         
     }
     
@@ -248,29 +262,40 @@ class ViewController: UIViewController {
     
     //間違えた時の処理
     func notCollect () {
-        //終了判定
         switch app.gameMode {
         case 0 :
-            countLabel.text = "GAMEOVER"
+            buttonFlag = 0
+            playTimeCount = playTimeCount + 10
+            nextButton.alpha = 1
+            yesButton.alpha = 0.5
+            noButton.alpha = 0.5
             break
         case 1 :
+            titleLabel.text = ansText
+            titleLabel.font = UIFont.systemFontOfSize(CGFloat(20) * sizeRate())
+            buttonFlag = 0
+            restartButton.alpha = 1
+            homeButton.alpha = 1
             homeButton.titleLabel?.text="Score"
             countLabel.text = "Score\n"+String(ansCount)
         default :
             break
         }
-        
-        titleLabel.text = ansText
-        buttonFlag = 0
-        restartButton.alpha = 1
-        homeButton.alpha = 1
-        playTimer.invalidate()
+    
     }
     
     
     //リスタートするときのメソッド
     func restartButtonPush(sender: UIButton) {
         firstStart()
+    }
+    
+    //次の問題にときのメソッド
+    func nextButtonPush(sender: UIButton) {
+        yesButton.alpha = 1.0
+        noButton.alpha = 1.0
+        buttonFlag = 1
+        labelTextSet()
     }
     
     //リスタートするときのメソッド
@@ -487,7 +512,7 @@ class ViewController: UIViewController {
         return false
     }
     
-    
+
     func signGet(i:Int) -> String{
         switch i{
         case 0:
