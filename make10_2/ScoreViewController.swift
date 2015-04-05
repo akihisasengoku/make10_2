@@ -49,12 +49,11 @@ class ScoreViewController: UIViewController {
         var timeText = ""
         switch app.gameMode {
         case 0:
-            modTitle = "TimeAttac"
-            scoreTime = Double(Int(scoreTime * 100.0)) / 100.0
-            timeText = String("\(scoreTime)")
+            //modTitle = "TimeAttac"
+            timeText = String(format: "%0.2f", Float(scoreTime))
             self.dataUpdate1()
         case 1:
-            modTitle = "Perfect"
+            //modTitle = "Perfect"
             timeText = ansCountText.0.description
             self.dataUpdate2()
         default :
@@ -64,7 +63,9 @@ class ScoreViewController: UIViewController {
         //タイトル
         self.view.addSubview(makeMyLabel(0, title:modTitle, myX: X, myY: Y*3 ,size:35))
         //現在スコア
-        self.view.addSubview(makeMyLabel(0, title:timeText , myX: X, myY: Y * 7 , size : 40))
+        var scoreLabel = makeMyLabel(0, title:timeText , myX: X, myY: Y * 7 , size : 55)
+        scoreLabel.textColor = UIColor.redColor()
+        self.view.addSubview(scoreLabel)
         
         
         var flag = 0
@@ -100,7 +101,7 @@ class ScoreViewController: UIViewController {
                 updateNum = i
                 flag = 1
             }
-            scoreArray.insert(String("\(scoreArray1[i])"), atIndex: i)
+            scoreArray.insert(String(format: "%0.2f", Float(scoreArray1[i])), atIndex: i)
         }
         
         //データの書き込み

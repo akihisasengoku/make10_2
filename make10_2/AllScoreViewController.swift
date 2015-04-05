@@ -30,7 +30,7 @@ class AllScoreViewController: UIViewController {
         for i in 0...8 {
             var d = CGFloat(i*3+11)
             var text = ""
-            text = i.description+"位    "+String("\(scoreArray1[i])")
+            text = i.description+"位    "+String(format: "%0.2f", Float(scoreArray1[i]))
             self.view.addSubview(makeMyLabel(0, title: text, myX: X*1, myY: Y*d, size: 20))
             text = i.description+"位    "+scoreArray2[i].description
             self.view.addSubview(makeMyLabel(0, title: text, myX: X*3, myY: Y*d, size: 20))

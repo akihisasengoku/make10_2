@@ -31,6 +31,7 @@ class ViewController: UIViewController {
     var countLabel : UILabel = UILabel()
     var titleLabel : UILabel = UILabel()
     var ansLabel : UILabel = UILabel()
+    var plusLabel : UILabel = UILabel()
     
     var initBackLable : UILabel = UILabel()
     var initCountLabel : UILabel = UILabel()
@@ -41,6 +42,7 @@ class ViewController: UIViewController {
     var restartButton :UIButton = UIButton()
     var nextButton :UIButton = UIButton()
     var homeButton :UIButton = UIButton()
+    var homeButton1 :UIButton = UIButton()
     
     //タイム管理用
     var initTimer : NSTimer!
@@ -50,7 +52,8 @@ class ViewController: UIViewController {
     
     //正解数を保存
     var ansCount : Int = 0
-    
+    //不正数の保存
+    var noAnsCount: Int = 0
     //フラグ
     var buttonFlag = 0
     
@@ -96,8 +99,8 @@ class ViewController: UIViewController {
         self.view.addSubview(titleLabel)
         
         countLabel.frame = CGRectMake(0, 0, self.view.frame.size.width, 160)
-        countLabel.layer.position = CGPoint(x: self.view.frame.size.width/2, y: positionY - frameY/2 - frameY/10*7)
-        countLabel.font = UIFont.systemFontOfSize(CGFloat(45) * sizeRate())
+        countLabel.layer.position = CGPoint(x: self.view.frame.size.width/2, y: positionY - frameY/2 - frameY/10*8)
+        countLabel.font = UIFont.systemFontOfSize(CGFloat(40) * sizeRate())
         countLabel.numberOfLines = 2
         countLabel.textAlignment = NSTextAlignment.Center
         self.view.addSubview(countLabel)
@@ -112,7 +115,7 @@ class ViewController: UIViewController {
         self.view.addSubview(barLabel)
         
         letterLabel = makeNumLabel(0, title:"あ", myX: 20 + labelX*4, myY: numY)
-        letterLabel.font = UIFont.systemFontOfSize(CGFloat(40 * sizeRate()))
+        letterLabel.font = UIFont.systemFontOfSize(CGFloat( 35 * sizeRate()))
         self.view.addSubview(letterLabel)
         
         labelArray.insert(makeNumLabel(0, title:"1", myX: 20 + labelX*10, myY: numY), atIndex: 0)
@@ -165,9 +168,18 @@ class ViewController: UIViewController {
         initCountLabel.textAlignment = NSTextAlignment.Center
         self.view.addSubview(initCountLabel)
         
-        ansLabel = makeNumLabel(0, title: "aaa", myX: self.view.frame.size.width/2, myY: positionY - frameY/2 - frameY/2)
+        ansLabel = makeNumLabel(0, title: "", myX: self.view.frame.size.width/2, myY: positionY - frameY/2 - frameY/5 - labelX * 4)
         ansLabel.font = UIFont.systemFontOfSize(CGFloat(20) * sizeRate())
         self.view.addSubview(ansLabel)
+        
+        plusLabel = makeNumLabel(0, title: "", myX: self.view.frame.size.width/2 + ButtonY * 4, myY: positionY - frameY/2 - frameY/5)
+        plusLabel.font = UIFont.systemFontOfSize(CGFloat(35) * sizeRate())
+        self.view.addSubview(plusLabel)
+        
+        homeButton1 = makeButton(2, title: "", myX: self.view.frame.size.width/12, myY: self.view.frame.size.width/8, s: "home:")
+        var buttonImage = UIImage(named: "HomeBotton.png") as UIImage?
+        homeButton1.setBackgroundImage(buttonImage, forState: UIControlState.Normal);
+        self.view.addSubview(homeButton1)
         
     }
     
@@ -177,13 +189,18 @@ class ViewController: UIViewController {
     }
     
     func firstStart() {
+        countLabel.font = UIFont.systemFontOfSize(CGFloat(40) * sizeRate())
+        
         timerCount = 3
+        ansLabel.alpha = 0
         ansCount = 0
+        noAnsCount = 0
         initBackLable.alpha = 1.0
         initCountLabel.alpha = 1.0
         initCountLabel.text = timerCount.description
         restartButton.alpha = 0
         homeButton.alpha = 0
+        homeButton1.alpha = 0
         initTimer = NSTimer.scheduledTimerWithTimeInterval(0.9, target: self, selector: Selector("firstUpdate"), userInfo: nil, repeats: true)
     }
     
@@ -200,7 +217,12 @@ class ViewController: UIViewController {
             }
             initBackLable.alpha = 0
             initCountLabel.alpha = 0
+            yesButton.alpha = 1
+            noButton.alpha = 1
+            nextButton.alpha = 0
             buttonFlag = 1
+            plusLabel.alpha = 0
+            homeButton1.alpha = 1
             labelTextSet()
         }
         
@@ -250,8 +272,11 @@ class ViewController: UIViewController {
         switch app.gameMode {
         case 0 :
             if ansCount == 10 {
-                playTimer.invalidate()
+
                 performSegueWithIdentifier("next2",sender: nil)
+                
+                playTimer.invalidate()
+                return
             }
         default :
             println("era-")
@@ -264,11 +289,45 @@ class ViewController: UIViewController {
     func notCollect () {
         switch app.gameMode {
         case 0 :
-            buttonFlag = 0
-            playTimeCount = playTimeCount + 10
-            nextButton.alpha = 1
-            yesButton.alpha = 0.5
-            noButton.alpha = 0.5
+            noAnsCount++
+            ansCount++
+            
+            var text = String(format: "%0.1f", Float(playTimeCount))
+            titleLabel.text = text
+            plusLabel.alpha = 1
+            plusLabel.text = "+"+String(10*noAnsCount)+"s"
+            playTimeCount = playTimeCount + Double(10*noAnsCount)
+            
+            if ansCount == 10 {
+                ansLabel.text = ansText
+                ansLabel.alpha = 1
+                
+                countLabel.font = UIFont.systemFontOfSize(CGFloat(30) * sizeRate())
+                
+                buttonFlag = 0
+                yesButton.alpha = 0.5
+                noButton.alpha = 0.5
+                restartButton.alpha = 1
+                homeButton.alpha = 1
+                restartButton.titleLabel?.text="Restart"
+                homeButton.titleLabel?.text="Score"
+                countLabel.text = "Score\n"+String("\(Double(Int(playTimeCount * 100.0)) / 100.0)")
+                
+                playTimer.invalidate()
+                
+            }else {
+            
+                
+                buttonFlag = 0
+                nextButton.alpha = 1
+                yesButton.alpha = 0.5
+                noButton.alpha = 0.5
+                ansLabel.alpha = 1
+                ansLabel.text = ansText
+                
+                playTimer.invalidate()
+            }
+            
             break
         case 1 :
             titleLabel.text = ansText
@@ -276,6 +335,8 @@ class ViewController: UIViewController {
             buttonFlag = 0
             restartButton.alpha = 1
             homeButton.alpha = 1
+            yesButton.alpha = 0.5
+            noButton.alpha = 0.5
             homeButton.titleLabel?.text="Score"
             countLabel.text = "Score\n"+String(ansCount)
         default :
@@ -295,14 +356,21 @@ class ViewController: UIViewController {
         yesButton.alpha = 1.0
         noButton.alpha = 1.0
         buttonFlag = 1
+        
+        ansLabel.alpha = 0
+        plusLabel.alpha = 0
+        
+        nextButton.alpha = 0
         labelTextSet()
+        
+        playTimer =  NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: Selector("playUpdate"), userInfo: nil, repeats: true)
     }
     
     //リスタートするときのメソッド
     func homeButtonPush(sender: UIButton) {
         switch app.gameMode {
         case 0 :
-            performSegueWithIdentifier("next5",sender: nil)
+            performSegueWithIdentifier("next2",sender: nil)
 
         case 1 :
             performSegueWithIdentifier("next2",sender: nil)
@@ -315,7 +383,7 @@ class ViewController: UIViewController {
     func makeNumLabel(num : Int, title: NSString, myX: CGFloat, myY: CGFloat) -> UILabel{
         
         let myLabel: UILabel = UILabel()
-        myLabel.frame = CGRectMake(0,0,160 * xRate(),380 * yRate())
+        myLabel.frame = CGRectMake(0,0,340 * xRate(),380 * yRate())
         myLabel.layer.position = CGPoint(x: myX, y: myY)
         myLabel.font = UIFont(name: "TrebuchetMS-Bold", size: 95 * sizeRate())
         
@@ -353,6 +421,14 @@ class ViewController: UIViewController {
         makeButton.tag = tagNum
         // イベントを追加する.
         makeButton.addTarget(self, action: s, forControlEvents: .TouchUpInside)
+        if tagNum == 2 {
+            makeButton.frame = CGRectMake(0,0,50 * xRate(),50 * xRate())
+            makeButton.layer.borderWidth = 0
+            makeButton.layer.position = CGPoint(x: myX, y: myY)
+            makeButton.backgroundColor = UIColor.whiteColor()
+        }
+        
+        makeButton.addTarget(self, action: s, forControlEvents: .TouchUpInside)
         return makeButton
     }
     
@@ -360,7 +436,9 @@ class ViewController: UIViewController {
     //ラベルの文字のセットと数字をリセットする
     func labelTextSet () {
         
-        titleLabel.text = "10を作れるか？"
+        if app.gameMode == 1 {
+            titleLabel.text = "10を作れるか？"
+        }
         
         switch app.gameMode{
         case 0 :
@@ -474,12 +552,20 @@ class ViewController: UIViewController {
                 }
             }
             
+            if sum1 < 0 {
+                continue
+            }
+            
             for b in 0...3{
                 if arrayCount == 2 {
                     continue
                 }
                 
                 sum2 = self.cal(sum1, num2: Double(numArray[2]), cal: b)
+                if sum2 < 0 {
+                    continue
+                }
+                
                 ansSignArray[1] = "、"+d(sum1)+self.signGet(b)+String(numArray[2])+"＝"+d(sum2)
                 
                 if arrayCount == 3 {
@@ -496,6 +582,10 @@ class ViewController: UIViewController {
                     }
                     
                     sum3 = self.cal(sum2, num2: Double(numArray[3]), cal: c)
+                    if sum3 < 0 {
+                        continue
+                    }
+                    
                     ansSignArray[2] = "、"+d(sum2)+self.signGet(c)+String(numArray[3])+"＝"+d(sum3)
                     
                     
@@ -719,6 +809,10 @@ class ViewController: UIViewController {
             }
         }
         
+    }
+    
+    func home (sender : UIButton) {
+        performSegueWithIdentifier("next5",sender: nil)
     }
     
     func xRate () -> CGFloat {
