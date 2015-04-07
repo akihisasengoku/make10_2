@@ -50,7 +50,7 @@ class RuleViewController: UIViewController {
         ruleLabel.numberOfLines = 2
         self.view.addSubview(ruleLabel)
         
-        ruleText = "1.真ん中の数字のみを使う"
+        ruleText = "1.マイナス、小数点は使わない"
         ruleLabel = makeNumLabel(1, title: ruleText, myX: ruleX, myY: ruleY*28)
         ruleLabel.font = UIFont.systemFontOfSize(CGFloat(20)*sizeRate())
         ruleLabel.numberOfLines = 2

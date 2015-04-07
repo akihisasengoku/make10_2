@@ -28,6 +28,11 @@ class ScoreViewController: UIViewController {
         
         setLabel()
         
+        let homeButton = makeButton1(1, title: "", myX: self.view.frame.size.width/12, myY: self.view.frame.size.width/8, s: "home:")
+        var buttonImage = UIImage(named: "HomeBotton.png") as UIImage?
+        homeButton.setBackgroundImage(buttonImage, forState: UIControlState.Normal);
+        self.view.addSubview(homeButton)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,8 +46,8 @@ class ScoreViewController: UIViewController {
         var X = self.view.frame.size.width / 2
         var Y = self.view.frame.size.height / 45
         
-        self.view.addSubview(makeButton("RESTART",X:X, Y: Y*38, s: "touchRestartButton:" , size :20))
-        self.view.addSubview(makeButton("HOME",X:X, Y: Y*42, s: "touchHomeButton:" , size: 20))
+        self.view.addSubview(makeButton("RESTART",X:X, Y: Y*40, s: "touchRestartButton:" , size :20))
+        //self.view.addSubview(makeButton("HOME",X:X, Y: Y*42, s: "touchHomeButton:" , size: 20))
 
         
         var modTitle = ""
@@ -150,7 +155,12 @@ class ScoreViewController: UIViewController {
     func makeButton (title : String , X : CGFloat , Y : CGFloat , s: Selector , size: Int ) -> UIButton {
         let makeButton = UIButton()
         // サイズを設定する.
-        makeButton.frame = CGRectMake(0,0,140 * xRate(),45 * yRate())
+        makeButton.frame = CGRectMake(0,0,140 * xRate(),55 * yRate())
+        //角を丸くする
+        makeButton.layer.cornerRadius = 6
+        //枠線を黒でつける
+        makeButton.layer.borderWidth = 2
+        makeButton.layer.borderColor = UIColor.blackColor().CGColor
         // 背景色を設定する.
         makeButton.backgroundColor = UIColor.redColor()
         // 枠を丸くする.
@@ -172,6 +182,10 @@ class ScoreViewController: UIViewController {
         
     }
     
+    func home (sender : UIButton) {
+        performSegueWithIdentifier("next4",sender: nil)
+    }
+    
     func xRate () -> CGFloat {
         var rate = Double(self.view.frame.width) / 375.0
         return CGFloat(rate)
@@ -184,6 +198,44 @@ class ScoreViewController: UIViewController {
     
     func sizeRate () -> CGFloat {
         return (xRate()+yRate())/2
+    }
+    
+    
+    
+    //ボタンを作成するメソッド
+    func makeButton1 (tagNum : Int, title: NSString, myX: CGFloat, myY: CGFloat , s :Selector) -> UIButton {
+        let makeButton = UIButton()
+        // サイズを設定する.
+        makeButton.frame = CGRectMake(0,0,200 * xRate(),70 * yRate())
+        // 背景色を設定する.
+        makeButton.backgroundColor = UIColor.redColor()
+        //角を丸くする
+        makeButton.layer.cornerRadius = 6
+        //枠線を黒でつける
+        makeButton.layer.borderWidth = 2
+        makeButton.layer.borderColor = UIColor.blackColor().CGColor
+        // タイトルを設定する(通常時).
+        makeButton.setTitle(title, forState: UIControlState.Normal)
+        makeButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        // タイトルを設定する(ボタンがハイライトされた時).
+        makeButton.setTitle(title, forState: UIControlState.Highlighted)
+        makeButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
+        //　テキストの大きさ
+        makeButton.titleLabel!.font = UIFont(name: "Helvetica-Bold",size: CGFloat(30) * sizeRate())
+        // ボタンの位置を指定する.
+        makeButton.layer.position = CGPoint(x: myX, y: myY)
+        // タグを設定する.
+        makeButton.tag = tagNum
+        // イベントを追加する.
+        makeButton.addTarget(self, action: s, forControlEvents: .TouchUpInside)
+        if tagNum == 1 {
+            makeButton.frame = CGRectMake(0,0,50 * xRate(),50 * xRate())
+            makeButton.layer.borderWidth = 0
+            makeButton.layer.position = CGPoint(x: myX, y: myY)
+            makeButton.backgroundColor = UIColor.whiteColor()
+        }
+        
+        return makeButton
     }
 
 }

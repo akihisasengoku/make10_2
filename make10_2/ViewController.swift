@@ -103,6 +103,7 @@ class ViewController: UIViewController {
         countLabel.font = UIFont.systemFontOfSize(CGFloat(40) * sizeRate())
         countLabel.numberOfLines = 2
         countLabel.textAlignment = NSTextAlignment.Center
+        countLabel.alpha = 0
         self.view.addSubview(countLabel)
         
         
@@ -179,6 +180,7 @@ class ViewController: UIViewController {
         homeButton1 = makeButton(2, title: "", myX: self.view.frame.size.width/12, myY: self.view.frame.size.width/8, s: "home:")
         var buttonImage = UIImage(named: "HomeBotton.png") as UIImage?
         homeButton1.setBackgroundImage(buttonImage, forState: UIControlState.Normal);
+        homeButton1.alpha = 0
         self.view.addSubview(homeButton1)
         
     }
@@ -191,6 +193,7 @@ class ViewController: UIViewController {
     func firstStart() {
         countLabel.font = UIFont.systemFontOfSize(CGFloat(40) * sizeRate())
         
+        countLabel.alpha = 1
         timerCount = 3
         ansLabel.alpha = 0
         ansCount = 0
@@ -201,7 +204,7 @@ class ViewController: UIViewController {
         restartButton.alpha = 0
         homeButton.alpha = 0
         homeButton1.alpha = 0
-        initTimer = NSTimer.scheduledTimerWithTimeInterval(0.9, target: self, selector: Selector("firstUpdate"), userInfo: nil, repeats: true)
+        initTimer = NSTimer.scheduledTimerWithTimeInterval(0.6, target: self, selector: Selector("firstUpdate"), userInfo: nil, repeats: true)
     }
     
     func firstUpdate () {
@@ -449,22 +452,12 @@ class ViewController: UIViewController {
             countLabel.text = ansCount.description
         }
         
-        //使用する４けたの数字をランダムで生成する　　カーナンバー
-        var flag = 0
-        var count = 0
-        numArray = []
-        for i in 0...3{
-            let addNum = Int(arc4random() % 10)
-            if (flag == 0 && addNum == 0){
-                labelArray[i].text = "・"
-            }else {
-                numArray.insert(addNum, atIndex: count)
-                labelArray[i].text = numArray[count].description
-                flag = 1
-                count++
-            }
+        //４の数字を生成する
+        self.makeNum()
+        var n = arc4random() % 10;
+        if autoCal() == false  && n < 6{
+            self.makeNum()
         }
-        
         
         //識別番号　３けた
         locateNum = 100*Int(arc4random() % 10) + 10*Int(arc4random() % 10) + Int(arc4random() % 10)
@@ -525,6 +518,44 @@ class ViewController: UIViewController {
     }
 
     
+    func makeNum () {
+        //使用する４けたの数字をランダムで生成する　　カーナンバー
+        var flag = 0
+        var count = 0
+        numArray = []
+        for i in 0...3{
+            let addNum = Int(arc4random() % 10)
+            if (flag == 0 && addNum == 0){
+                labelArray[i].text = "・"
+            }else {
+                numArray.insert(addNum, atIndex: count)
+                labelArray[i].text = numArray[count].description
+                flag = 1
+                count++
+            }
+        }
+    }
+
+    
+    /*
+    //手動でナンバー生成
+    func makeNum () {
+    //使用する４けたの数字をランダムで生成する　　カーナンバー
+        numArray.insert(0, atIndex: 0)
+        numArray.insert(2, atIndex: 1)
+        numArray.insert(3, atIndex: 2)
+        numArray.insert(3, atIndex: 3)
+        
+        
+        labelArray[0].text = "・"
+        labelArray[1].text = "2"
+        labelArray[2].text = "3"
+        labelArray[3].text = "3"
+        
+        
+    }
+*/
+    
     //ここから計算！
     func autoCal()->Bool {
         let arrayCount = numArray.count
@@ -552,7 +583,7 @@ class ViewController: UIViewController {
                 }
             }
             
-            if sum1 < 0 {
+            if sum1 < 0 || defInDouble(sum1) == false{
                 continue
             }
             
@@ -562,11 +593,11 @@ class ViewController: UIViewController {
                 }
                 
                 sum2 = self.cal(sum1, num2: Double(numArray[2]), cal: b)
-                if sum2 < 0 {
+                ansSignArray[1] = "、"+d(sum1)+self.signGet(b)+String(numArray[2])+"＝"+d(sum2)
+                println(ansSignArray[1])
+                if sum2 < 0 || defInDouble(sum2) == false {
                     continue
                 }
-                
-                ansSignArray[1] = "、"+d(sum1)+self.signGet(b)+String(numArray[2])+"＝"+d(sum2)
                 
                 if arrayCount == 3 {
                     if sum2 == 10 {
@@ -582,12 +613,12 @@ class ViewController: UIViewController {
                     }
                     
                     sum3 = self.cal(sum2, num2: Double(numArray[3]), cal: c)
-                    if sum3 < 0 {
+                    ansSignArray[2] = "、"+d(sum2)+self.signGet(c)+String(numArray[3])+"＝"+d(sum3)
+                    println(ansSignArray[2])
+                    if sum3 < 0 || defInDouble(sum3) == false{
                         continue
                     }
-                    
-                    ansSignArray[2] = "、"+d(sum2)+self.signGet(c)+String(numArray[3])+"＝"+d(sum3)
-                    
+
                     
                     if sum3 == 10 {
                         ansText = ansSignArray[0]+ansSignArray[1]+ansSignArray[2]
@@ -600,6 +631,20 @@ class ViewController: UIViewController {
         ansText =  "10は作れない"
         println(ansText)
         return false
+    }
+    
+    func defInDouble(num1 : Double) -> Bool{
+        if num1 < 100000 && num1  > -100000{
+        }else {
+            return false
+        }
+        
+        var num2 : Double = Double(Int(num1))
+        if num1 == num2 {
+            return true
+        }else {
+            return false
+        }
     }
     
 

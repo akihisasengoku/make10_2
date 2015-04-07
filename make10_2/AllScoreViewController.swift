@@ -37,7 +37,7 @@ class AllScoreViewController: UIViewController {
         }
         
         
-        self.view.addSubview(makeButton("HOME", X: X*2, Y: Y*39, s: "Home:", size: 20))
+        self.view.addSubview(makeButton("HOME", X: X*2, Y: Y*40, s: "Home:", size: 20))
     }
 
     override func didReceiveMemoryWarning() {
@@ -80,7 +80,12 @@ class AllScoreViewController: UIViewController {
     func makeButton (title : String , X : CGFloat , Y : CGFloat , s: Selector , size: Int ) -> UIButton {
         let makeButton = UIButton()
         // サイズを設定する.
-        makeButton.frame = CGRectMake(0,0,140 * xRate(),45 * yRate())
+        makeButton.frame = CGRectMake(0,0,140 * xRate(),55 * yRate())
+        //角を丸くする
+        makeButton.layer.cornerRadius = 6
+        //枠線を黒でつける
+        makeButton.layer.borderWidth = 2
+        makeButton.layer.borderColor = UIColor.blackColor().CGColor
         // 背景色を設定する.
         makeButton.backgroundColor = UIColor.redColor()
         // 枠を丸くする.

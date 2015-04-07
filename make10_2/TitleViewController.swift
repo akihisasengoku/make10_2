@@ -39,11 +39,6 @@ class TitleViewController: UIViewController {
         myImageView.layer.position = CGPoint(x: X, y: Y * 5)
         // UIImageViewをViewに追加する.
         self.view.addSubview(myImageView)
-        
-        let homeButton = makeButton(1, title: "", myX: self.view.frame.size.width/12, myY: self.view.frame.size.width/8, s: "home:")
-        var buttonImage = UIImage(named: "HomeBotton.png") as UIImage?
-        homeButton.setBackgroundImage(buttonImage, forState: UIControlState.Normal);
-        self.view.addSubview(homeButton)
     
     }
 
@@ -65,10 +60,7 @@ class TitleViewController: UIViewController {
     func score (sender : UIButton) {
         performSegueWithIdentifier("next6",sender: nil)
     }
-    
-    func home (sender : UIButton) {
-        performSegueWithIdentifier("next6",sender: nil)
-    }
+
 
     /*
     // MARK: - Navigation
@@ -122,12 +114,6 @@ class TitleViewController: UIViewController {
         makeButton.tag = tagNum
         // イベントを追加する.
         makeButton.addTarget(self, action: s, forControlEvents: .TouchUpInside)
-        if tagNum == 1 {
-            makeButton.frame = CGRectMake(0,0,50 * xRate(),50 * xRate())
-            makeButton.layer.borderWidth = 0
-            makeButton.layer.position = CGPoint(x: myX, y: myY)
-            makeButton.backgroundColor = UIColor.whiteColor()
-        }
         
         return makeButton
     }
