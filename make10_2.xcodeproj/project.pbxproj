@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		46149E741AD4263500FBB1E2 /* InitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46149E731AD4263500FBB1E2 /* InitViewController.swift */; };
+		46149E791AD428C500FBB1E2 /* p1.png in Resources */ = {isa = PBXBuildFile; fileRef = 46149E751AD428C500FBB1E2 /* p1.png */; };
+		46149E7A1AD428C500FBB1E2 /* p2.png in Resources */ = {isa = PBXBuildFile; fileRef = 46149E761AD428C500FBB1E2 /* p2.png */; };
+		46149E7B1AD428C500FBB1E2 /* p3.png in Resources */ = {isa = PBXBuildFile; fileRef = 46149E771AD428C500FBB1E2 /* p3.png */; };
+		46149E7C1AD428C500FBB1E2 /* p4.png in Resources */ = {isa = PBXBuildFile; fileRef = 46149E781AD428C500FBB1E2 /* p4.png */; };
+		46149E991AD5824600FBB1E2 /* Application.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46149E981AD5824600FBB1E2 /* Application.xib */; };
+		46149E9B1AD5836300FBB1E2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46149E9A1AD5836300FBB1E2 /* Images.xcassets */; };
 		4614FF0C1ABF0D3200DCFD8C /* TitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4614FF0B1ABF0D3200DCFD8C /* TitleViewController.swift */; };
 		4614FF101ABF908600DCFD8C /* AllScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4614FF0F1ABF908600DCFD8C /* AllScoreViewController.swift */; };
 		46E8CB691ACE153A00605DAB /* logo10.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E8CB681ACE153A00605DAB /* logo10.png */; };
@@ -15,7 +22,6 @@
 		66E5F9241AB4F2D500E978A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E5F9231AB4F2D500E978A3 /* AppDelegate.swift */; };
 		66E5F9261AB4F2D500E978A3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E5F9251AB4F2D500E978A3 /* ViewController.swift */; };
 		66E5F9291AB4F2D500E978A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66E5F9271AB4F2D500E978A3 /* Main.storyboard */; };
-		66E5F92B1AB4F2D500E978A3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66E5F92A1AB4F2D500E978A3 /* Images.xcassets */; };
 		66E5F92E1AB4F2D500E978A3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66E5F92C1AB4F2D500E978A3 /* LaunchScreen.xib */; };
 		66E5F93A1AB4F2D500E978A3 /* make10_2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E5F9391AB4F2D500E978A3 /* make10_2Tests.swift */; };
 		66E5F99B1ABA5F0200E978A3 /* RuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E5F99A1ABA5F0200E978A3 /* RuleViewController.swift */; };
@@ -33,6 +39,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		46149E731AD4263500FBB1E2 /* InitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitViewController.swift; sourceTree = "<group>"; };
+		46149E751AD428C500FBB1E2 /* p1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = p1.png; sourceTree = "<group>"; };
+		46149E761AD428C500FBB1E2 /* p2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = p2.png; sourceTree = "<group>"; };
+		46149E771AD428C500FBB1E2 /* p3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = p3.png; sourceTree = "<group>"; };
+		46149E781AD428C500FBB1E2 /* p4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = p4.png; sourceTree = "<group>"; };
+		46149E981AD5824600FBB1E2 /* Application.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Application.xib; path = ../Application.xib; sourceTree = "<group>"; };
+		46149E9A1AD5836300FBB1E2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4614FF0B1ABF0D3200DCFD8C /* TitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleViewController.swift; sourceTree = "<group>"; };
 		4614FF0F1ABF908600DCFD8C /* AllScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllScoreViewController.swift; sourceTree = "<group>"; };
 		46E8CB681ACE153A00605DAB /* logo10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo10.png; sourceTree = "<group>"; };
@@ -43,7 +56,6 @@
 		66E5F9231AB4F2D500E978A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66E5F9251AB4F2D500E978A3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		66E5F9281AB4F2D500E978A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		66E5F92A1AB4F2D500E978A3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		66E5F92D1AB4F2D500E978A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		66E5F9331AB4F2D500E978A3 /* make10_2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = make10_2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		66E5F9381AB4F2D500E978A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -92,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				66E5F9231AB4F2D500E978A3 /* AppDelegate.swift */,
+				46149E731AD4263500FBB1E2 /* InitViewController.swift */,
 				4614FF0B1ABF0D3200DCFD8C /* TitleViewController.swift */,
 				66E5F99A1ABA5F0200E978A3 /* RuleViewController.swift */,
 				66E5F9251AB4F2D500E978A3 /* ViewController.swift */,
@@ -99,11 +112,15 @@
 				4614FF0F1ABF908600DCFD8C /* AllScoreViewController.swift */,
 				46E8CB6A1AD0374800605DAB /* make10.png */,
 				46E8CB681ACE153A00605DAB /* logo10.png */,
+				46149E751AD428C500FBB1E2 /* p1.png */,
+				46149E761AD428C500FBB1E2 /* p2.png */,
+				46149E771AD428C500FBB1E2 /* p3.png */,
+				46149E781AD428C500FBB1E2 /* p4.png */,
 				46E8CB6C1AD146EA00605DAB /* HomeBotton.png */,
 				66E5F9271AB4F2D500E978A3 /* Main.storyboard */,
 				66E5F9211AB4F2D500E978A3 /* Supporting Files */,
-				66E5F92A1AB4F2D500E978A3 /* Images.xcassets */,
 				66E5F92C1AB4F2D500E978A3 /* LaunchScreen.xib */,
+				46149E9A1AD5836300FBB1E2 /* Images.xcassets */,
 			);
 			path = make10_2;
 			sourceTree = "<group>";
@@ -111,6 +128,7 @@
 		66E5F9211AB4F2D500E978A3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				46149E981AD5824600FBB1E2 /* Application.xib */,
 				66E5F9221AB4F2D500E978A3 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -213,12 +231,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46149E7C1AD428C500FBB1E2 /* p4.png in Resources */,
 				46E8CB6D1AD146EA00605DAB /* HomeBotton.png in Resources */,
 				66E5F9291AB4F2D500E978A3 /* Main.storyboard in Resources */,
+				46149E7A1AD428C500FBB1E2 /* p2.png in Resources */,
+				46149E9B1AD5836300FBB1E2 /* Images.xcassets in Resources */,
+				46149E7B1AD428C500FBB1E2 /* p3.png in Resources */,
 				46E8CB6B1AD0374800605DAB /* make10.png in Resources */,
+				46149E991AD5824600FBB1E2 /* Application.xib in Resources */,
 				66E5F92E1AB4F2D500E978A3 /* LaunchScreen.xib in Resources */,
-				66E5F92B1AB4F2D500E978A3 /* Images.xcassets in Resources */,
 				46E8CB691ACE153A00605DAB /* logo10.png in Resources */,
+				46149E791AD428C500FBB1E2 /* p1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				66E5F9261AB4F2D500E978A3 /* ViewController.swift in Sources */,
+				46149E741AD4263500FBB1E2 /* InitViewController.swift in Sources */,
 				4614FF101ABF908600DCFD8C /* AllScoreViewController.swift in Sources */,
 				66E5F9241AB4F2D500E978A3 /* AppDelegate.swift in Sources */,
 				66E5F99B1ABA5F0200E978A3 /* RuleViewController.swift in Sources */,
@@ -364,6 +388,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = make10_2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -374,6 +399,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = make10_2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
