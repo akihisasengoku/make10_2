@@ -178,7 +178,10 @@ class ScoreViewController: UIViewController {
         // イベントを追加する.
         makeButton.addTarget(self, action: s, forControlEvents: .TouchUpInside)
         
+        makeButton.layer.shadowOpacity = 0.2
+        
         return makeButton
+        
         
     }
     
@@ -227,6 +230,8 @@ class ScoreViewController: UIViewController {
         // タグを設定する.
         makeButton.tag = tagNum
         // イベントを追加する.
+        
+        
         makeButton.addTarget(self, action: s, forControlEvents: .TouchUpInside)
         if tagNum == 1 {
             makeButton.frame = CGRectMake(0,0,50 * xRate(),50 * xRate())

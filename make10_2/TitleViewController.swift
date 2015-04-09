@@ -80,6 +80,8 @@ class TitleViewController: UIViewController {
         myLabel.layer.position = CGPoint(x: myX, y: myY)
         myLabel.font = UIFont(name: "TrebuchetMS-Bold", size: 40 * sizeRate())
         
+        myLabel.layer.shadowOpacity = 0.4;
+        
         myLabel.text = title
         myLabel.layer.masksToBounds = true
         myLabel.textAlignment = NSTextAlignment.Center
@@ -114,6 +116,8 @@ class TitleViewController: UIViewController {
         makeButton.tag = tagNum
         // イベントを追加する.
         makeButton.addTarget(self, action: s, forControlEvents: .TouchUpInside)
+        
+        makeButton.layer.shadowOpacity = 0.2;
         
         return makeButton
     }

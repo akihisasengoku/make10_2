@@ -41,10 +41,10 @@ class InitViewController: UIViewController, UIScrollViewDelegate {
             self.view.addSubview(scrollView)
             
             // UIImageViewをViewに追加する.
-            scrollView.addSubview(imageSet(UIImage(named: "p1.png")!,num:0))
-            scrollView.addSubview(imageSet(UIImage(named: "p2.png")!,num:1))
-            scrollView.addSubview(imageSet(UIImage(named: "p3.png")!,num:2))
-            scrollView.addSubview(imageSet(UIImage(named: "p4.png")!,num:3))
+            scrollView.addSubview(imageSet(UIImage(named: "pt1.png")!,num:0))
+            scrollView.addSubview(imageSet(UIImage(named: "pt2.png")!,num:1))
+            scrollView.addSubview(imageSet(UIImage(named: "pt3.png")!,num:2))
+            scrollView.addSubview(imageSet(UIImage(named: "pt4.png")!,num:3))
             let makeButton = UIButton()
             // サイズを設定する.
             makeButton.frame = CGRectMake(0,0,200 * xRate(),70 * yRate())
@@ -67,6 +67,7 @@ class InitViewController: UIViewController, UIScrollViewDelegate {
             makeButton.layer.position = CGPoint(x: self.view.frame.size.width*4+self.view.frame.size.width/2, y: self.view.frame.size.height/2)
             // イベントを追加する.
             makeButton.addTarget(self, action: "start:", forControlEvents: .TouchUpInside)
+            makeButton.layer.shadowOpacity = 0.2;
             scrollView.addSubview(makeButton)
             
             

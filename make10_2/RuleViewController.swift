@@ -97,6 +97,7 @@ class RuleViewController: UIViewController {
         makeButton.layer.position = CGPoint(x: ruleX, y: ruleY*39)
         // イベントを追加する.
         makeButton.addTarget(self, action: "pushButton:", forControlEvents: .TouchUpInside)
+        makeButton.layer.shadowOpacity = 0.2;
         self.view.addSubview(makeButton)
         
         
@@ -216,6 +217,8 @@ class RuleViewController: UIViewController {
         makeButton.layer.position = CGPoint(x: myX, y: myY)
         // タグを設定する.
         makeButton.tag = tagNum
+        
+        
         // イベントを追加する.
         makeButton.addTarget(self, action: s, forControlEvents: .TouchUpInside)
         if tagNum == 1 {

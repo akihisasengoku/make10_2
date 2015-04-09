@@ -37,7 +37,9 @@ class AllScoreViewController: UIViewController {
         }
         
         
-        self.view.addSubview(makeButton("HOME", X: X*2, Y: Y*40, s: "Home:", size: 20))
+        let homeButton = makeButton("HOME", X: X*2, Y: Y*40, s: "Home:", size: 20)
+        homeButton.layer.shadowOpacity = 0.2
+        self.view.addSubview(homeButton)
     }
 
     override func didReceiveMemoryWarning() {
@@ -103,8 +105,8 @@ class AllScoreViewController: UIViewController {
         // イベントを追加する.
         makeButton.addTarget(self, action: s, forControlEvents: .TouchUpInside)
         
+        makeButton.layer.shadowOpacity = 0.2;
         return makeButton
-        
     }
     
     func xRate () -> CGFloat {
