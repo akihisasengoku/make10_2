@@ -56,6 +56,8 @@ class ViewController: UIViewController {
     var noAnsCount: Int = 0
     //フラグ
     var buttonFlag = 0
+    //モードでレスターとボタンの切り替え
+    var restartFlag = 0
     
     
     let letter = ["あ","い","う","え","か","き","く","け","こ","さ","す","せ","そ","た","ち","つ","て","と","な","に","ぬ","ね","の","は","ひ","ふ","ほ","ま","み","む","め","も","や","ゆ","よ","ら","り","る","れ","ろ","を"]
@@ -63,7 +65,7 @@ class ViewController: UIViewController {
     let locateText : [String] = ["尾張小牧","札幌","函館","旭川","室蘭","釧路","帯広","北見","青森","八戸","岩手","盛岡","平泉","宮城","仙台","秋田","山形","庄内","福島","会津","郡山","いわき","水戸","土浦","つくば","宇都宮","那須","とちぎ","群馬","前橋","高崎","大宮","川口","所沢","川越","熊谷","春日部","越谷","千葉","成田","習志野","袖ヶ浦","野田","柏","品川","世田谷","練馬","杉並","足立","八王子","多摩","横浜","川崎","湘南","相模","山梨","富士山","新潟","長岡","長野","松本","諏訪","富山","石川","金沢","福井","岐阜","飛騨","静岡","浜松","沼津","伊豆","名古屋","豊橋","三河","岡崎","豊田","尾張小牧","一宮","春日井","三重","鈴鹿","滋賀","京都","大阪","なにわ","和泉","堺","奈良","和歌山","神戸","姫路","鳥取","島根","岡山","倉敷","広島","福山","山口","下関","徳島","香川","愛媛","高知","福岡","北九州","久留米","筑豊","佐賀","長崎","佐世保","熊本","大分","宮崎","鹿児島","奄美","沖縄"]
     
     
-    var app:AppDelegate = (UIApplication.sharedApplication().delegate as AppDelegate)
+    var app:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,7 +84,7 @@ class ViewController: UIViewController {
         let frameX = self.view.frame.size.width-40
         let frameY = (self.view.frame.size.width-40)/2.1
         
-        let positionY = self.view.frame.height/5*2
+        let positionY = self.view.frame.height/15*7
         
         labelFrame.frame = CGRectMake(0, 0, frameX, frameY)
         labelFrame.layer.position = CGPoint(x: self.view.frame.size.width/2, y: positionY)
@@ -110,7 +112,7 @@ class ViewController: UIViewController {
         //下の数字と文字とハイフンのラベルの作成！
         let labelX = frameX/36
         let labelY = frameY/12
-        let numY = self.view.frame.height/5*2 + labelY*2
+        let numY = self.view.frame.height/15*7 + labelY*2
         
         barLabel = makeNumLabel(0, title:"-", myX: 20 + labelX*21, myY: numY)
         self.view.addSubview(barLabel)
@@ -142,15 +144,15 @@ class ViewController: UIViewController {
         
         
         let ButtonX = self.view.frame.size.width/4
-        let ButtonY = self.view.frame.size.height/24
+        let ButtonY = self.view.frame.size.height/25
         
         //ボタン作成
-        yesButton = makeButton(1, title: "YES", myX: ButtonX*1, myY: ButtonY*15, s: "yesButtonPush:")
-        noButton = makeButton(1, title: "NO", myX: ButtonX*3, myY: ButtonY*15, s: "noButtonPush:")
-        restartButton = makeButton(1, title: "Restart", myX: ButtonX*2, myY: ButtonY*18, s: "restartButtonPush:")
-        nextButton = makeButton(1, title: "Next", myX: ButtonX*2, myY: ButtonY*18, s: "nextButtonPush:")
+        yesButton = makeButton(1, title: "YES", myX: ButtonX*1, myY: ButtonY*17, s: "yesButtonPush:")
+        noButton = makeButton(1, title: "NO", myX: ButtonX*3, myY: ButtonY*17, s: "noButtonPush:")
+        restartButton = makeButton(1, title: "Restart", myX: ButtonX*2, myY: ButtonY*20, s: "restartButtonPush:")
+        nextButton = makeButton(1, title: "Next", myX: ButtonX*2, myY: ButtonY*20, s: "nextButtonPush:")
         nextButton.alpha = 0
-        homeButton = makeButton(1, title: "Home", myX: ButtonX*2, myY: ButtonY*21, s: "homeButtonPush:")
+        homeButton = makeButton(1, title: "Home", myX: ButtonX*2, myY: ButtonY*23, s: "homeButtonPush:")
         self.view.addSubview(yesButton)
         self.view.addSubview(noButton)
         self.view.addSubview(restartButton)
@@ -197,6 +199,7 @@ class ViewController: UIViewController {
         timerCount = 3
         ansLabel.alpha = 0
         ansCount = 0
+        restartFlag = 0
         noAnsCount = 0
         initBackLable.alpha = 1.0
         initCountLabel.alpha = 1.0
@@ -224,6 +227,7 @@ class ViewController: UIViewController {
             noButton.alpha = 1
             nextButton.alpha = 0
             buttonFlag = 1
+            restartFlag = 0
             plusLabel.alpha = 0
             homeButton1.alpha = 1
             labelTextSet()
@@ -311,10 +315,11 @@ class ViewController: UIViewController {
                 yesButton.alpha = 0.5
                 noButton.alpha = 0.5
                 restartButton.alpha = 1
-                homeButton.alpha = 1
-                restartButton.titleLabel?.text="Restart"
-                homeButton.titleLabel?.text="Score"
+                homeButton.alpha = 0
+                restartButton.titleLabel?.text="Score"
                 countLabel.text = "Score\n"+String("\(Double(Int(playTimeCount * 100.0)) / 100.0)")
+                
+                restartFlag = 1
                 
                 playTimer.invalidate()
                 
@@ -333,14 +338,16 @@ class ViewController: UIViewController {
             
             break
         case 1 :
+            restartFlag = 1
+            
             titleLabel.text = ansText
             titleLabel.font = UIFont.systemFontOfSize(CGFloat(20) * sizeRate())
             buttonFlag = 0
             restartButton.alpha = 1
-            homeButton.alpha = 1
+            homeButton.alpha = 0
             yesButton.alpha = 0.5
             noButton.alpha = 0.5
-            homeButton.titleLabel?.text="Score"
+            restartButton.titleLabel?.text="Score"
             countLabel.text = "Score\n"+String(ansCount)
         default :
             break
@@ -351,7 +358,11 @@ class ViewController: UIViewController {
     
     //リスタートするときのメソッド
     func restartButtonPush(sender: UIButton) {
-        firstStart()
+        if restartFlag == 1  {
+            performSegueWithIdentifier("next2",sender: nil)
+        }else {
+            firstStart()
+        }
     }
     
     //次の問題にときのメソッド
@@ -390,7 +401,7 @@ class ViewController: UIViewController {
         myLabel.layer.position = CGPoint(x: myX, y: myY)
         myLabel.font = UIFont(name: "TrebuchetMS-Bold", size: 95 * sizeRate())
         
-        myLabel.text = title
+        myLabel.text = title as String
         myLabel.layer.masksToBounds = true
         myLabel.textAlignment = NSTextAlignment.Center
         myLabel.tag = num
@@ -402,7 +413,7 @@ class ViewController: UIViewController {
     func makeButton (tagNum : Int, title: NSString, myX: CGFloat, myY: CGFloat , s :Selector) -> UIButton {
         let makeButton = UIButton()
         // サイズを設定する.
-        makeButton.frame = CGRectMake(0,0,145 * xRate(),70 * yRate())
+        makeButton.frame = CGRectMake(0,0,140 * xRate(),65 * yRate())
         // 背景色を設定する.
         makeButton.backgroundColor = UIColor.redColor()
         //角を丸くする
@@ -411,13 +422,14 @@ class ViewController: UIViewController {
         makeButton.layer.borderWidth = 2
         makeButton.layer.borderColor = UIColor.blackColor().CGColor
         // タイトルを設定する(通常時).
-        makeButton.setTitle(title, forState: UIControlState.Normal)
+        makeButton.setTitle(title as String, forState: UIControlState.Normal)
         makeButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         // タイトルを設定する(ボタンがハイライトされた時).
-        makeButton.setTitle(title, forState: UIControlState.Highlighted)
+        makeButton.setTitle(title as String, forState: UIControlState.Highlighted)
         makeButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
         //　テキストの大きさ
         makeButton.titleLabel!.font = UIFont(name: "Helvetica-Bold",size: CGFloat(30) * sizeRate())
+        makeButton.titleLabel!.textAlignment = NSTextAlignment.Center
         // ボタンの位置を指定する.
         makeButton.layer.position = CGPoint(x: myX, y: myY)
         // タグを設定する.
@@ -470,7 +482,7 @@ class ViewController: UIViewController {
         //地名
         locateTextNum = Int(arc4random() % UInt32(locateText.count))
         let text = locateText[locateTextNum]
-        switch countElements(text) {
+        switch count(text) {
         case 2 :
             locateTextLabel.font = UIFont.systemFontOfSize(CGFloat(45) * sizeRate())
         case 3 :
@@ -842,7 +854,7 @@ class ViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "next2" {
-            var view = segue.destinationViewController as ScoreViewController
+            var view = segue.destinationViewController as! ScoreViewController
             switch app.gameMode {
             case 0 :
                 view.scoreTime = playTimeCount

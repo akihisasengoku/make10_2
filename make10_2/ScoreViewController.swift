@@ -19,7 +19,7 @@ class ScoreViewController: UIViewController {
     var scoreArray : [String] = []
     
 
-    var app:AppDelegate = (UIApplication.sharedApplication().delegate as AppDelegate)
+    var app:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,7 +97,7 @@ class ScoreViewController: UIViewController {
     
     func dataUpdate1 () {
         let defaults = NSUserDefaults.standardUserDefaults()
-        var scoreArray1 : [Double] = defaults.objectForKey("g1Scores") as [Double]
+        var scoreArray1 : [Double] = defaults.objectForKey("g1Scores") as! [Double]
         
         var flag = 0
         for i in 0...8 {
@@ -117,7 +117,7 @@ class ScoreViewController: UIViewController {
     
     func dataUpdate2 () {
         let defaults = NSUserDefaults.standardUserDefaults()
-        var scoreArray2 : [Int] = defaults.objectForKey("g2Scores") as [Int]
+        var scoreArray2 : [Int] = defaults.objectForKey("g2Scores") as! [Int]
         
         var flag = 0
         for i in 0...8 {
@@ -142,7 +142,7 @@ class ScoreViewController: UIViewController {
         myLabel.frame = CGRectMake(0,0,350 * xRate(),70 * yRate())
         myLabel.layer.position = CGPoint(x: myX, y: myY)
         myLabel.font = UIFont.systemFontOfSize(CGFloat(size) * sizeRate())
-        myLabel.text = title
+        myLabel.text = title as String
         myLabel.layer.masksToBounds = true
         myLabel.textAlignment = NSTextAlignment.Center
         if num == 1 {
@@ -218,10 +218,10 @@ class ScoreViewController: UIViewController {
         makeButton.layer.borderWidth = 2
         makeButton.layer.borderColor = UIColor.blackColor().CGColor
         // タイトルを設定する(通常時).
-        makeButton.setTitle(title, forState: UIControlState.Normal)
+        makeButton.setTitle(title as String, forState: UIControlState.Normal)
         makeButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         // タイトルを設定する(ボタンがハイライトされた時).
-        makeButton.setTitle(title, forState: UIControlState.Highlighted)
+        makeButton.setTitle(title as String, forState: UIControlState.Highlighted)
         makeButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
         //　テキストの大きさ
         makeButton.titleLabel!.font = UIFont(name: "Helvetica-Bold",size: CGFloat(30) * sizeRate())

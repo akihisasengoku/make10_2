@@ -197,6 +197,7 @@
 				TargetAttributes = {
 					66E5F91D1AB4F2D500E978A3 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = MZ4XNMSNPC;
 					};
 					66E5F9321AB4F2D500E978A3 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -385,9 +386,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = make10_2/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "8b119dc1-9299-4c3a-932c-31a92ec06efd";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -396,9 +401,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = make10_2/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "8b119dc1-9299-4c3a-932c-31a92ec06efd";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

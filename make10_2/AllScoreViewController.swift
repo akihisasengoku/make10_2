@@ -24,8 +24,8 @@ class AllScoreViewController: UIViewController {
         
         //データを読み込んで表示
         let defaults = NSUserDefaults.standardUserDefaults()
-        var scoreArray1 : [Double] = defaults.objectForKey("g1Scores") as [Double]
-        var scoreArray2 : [Int] = defaults.objectForKey("g2Scores") as [Int]
+        var scoreArray1 : [Double] = defaults.objectForKey("g1Scores") as! [Double]
+        var scoreArray2 : [Int] = defaults.objectForKey("g2Scores") as! [Int]
         
         for i in 0...8 {
             var d = CGFloat(i*3+11)
@@ -69,7 +69,7 @@ class AllScoreViewController: UIViewController {
         myLabel.frame = CGRectMake(0,0,350 * xRate(),70 * yRate())
         myLabel.layer.position = CGPoint(x: myX, y: myY)
         myLabel.font = UIFont.systemFontOfSize(CGFloat(size) * sizeRate())
-        myLabel.text = title
+        myLabel.text = title as String
         myLabel.layer.masksToBounds = true
         myLabel.textAlignment = NSTextAlignment.Center
         if num == 1 {
